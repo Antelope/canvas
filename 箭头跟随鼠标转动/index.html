@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="GB2312">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,minimal-ui">
+		<title>canvas基础</title>
+		<meta name="description" content="小白保险，我是投保神器小白，努力让小白也懂买保险，快来围观我吧" />
+		<meta name="Keywords" content="小白保险,小白,投保神器,小白保,小白保险网" />
+		<script type="text/javascript" src="../utils.js"></script>
+		<script type="text/javascript" src="arrow.js"></script>
+		<style>
+			body{padding: 0;margin:0;overflow: hidden;}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500" style="background:#ccc"></canvas>
+		<script>
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				var context = canvas.getContext("2d");
+				var centerX = canvas.width/2;
+				var centerY = canvas.height/2;
+				
+				//传入canvas,获取鼠标在canvas上移到的坐标
+				var mouse = utils.captureMouse(canvas);
+				//创建一个arrow对象
+				var arrow = new Arrow();
+				//将arrow的坐标设置为canvas的中心
+				arrow.x = centerX;
+				arrow.y = centerY;
+				//动画循环函数
+				(function drawFrame(){
+					window.requestAnimationFrame(drawFrame);
+					context.clearRect(0,0,canvas.width,canvas.height);
+					//获取dy,dx的值
+					var dx = mouse.x-arrow.x,
+						dy = mouse.y-arrow.y;
+					//设置旋转角度
+					arrow.rotation = Math.atan2(dy,dx)
+					//调用draw方法画出
+					arrow.draw(context);
+				}());
+			};
+		</script>
+	</body>
+</html>

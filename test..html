@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="GB2312">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,minimal-ui">
+		<title>canvas基础</title>
+		<meta name="description" content="小白保险，我是投保神器小白，努力让小白也懂买保险，快来围观我吧" />
+		<meta name="Keywords" content="小白保险,小白,投保神器,小白保,小白保险网" />
+		<style>
+			*{padding: 0;margin:0}
+			#s{color:red}
+		</style>
+	</head>
+	<body>
+		<div id='d'>
+		    <p id='p'>
+		        <span id='s'>xxxxx</span>
+		    </p>
+		</div>
+		<script>
+			var a= 10;
+			function test(){
+				a = 100;
+				alert(a);
+				alert(this.a);
+				var a;
+				alert(a)
+			}
+			test()
+		</script>
+	</body>
+</html>

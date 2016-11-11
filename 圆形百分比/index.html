@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="GB2312">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,minimal-ui">
+		<title>canvas基础</title>
+		<meta name="description" content="小白保险，我是投保神器小白，努力让小白也懂买保险，快来围观我吧" />
+		<meta name="Keywords" content="小白保险,小白,投保神器,小白保,小白保险网" />
+		<style>
+			*{padding: 0;margin:0}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500" style="background:#000"></canvas>
+		<script>
+		window.onload = function(){
+			var canvas = document.getElementById("canvas"),
+				ctx = canvas.getContext("2d");
+				//canvas中心点坐标
+				ctxX = canvas.width/2,
+				ctxY = canvas.height/2;
+				//将360度分层100份
+				rad = Math.PI*2/100, 
+				speed = 0.1;
+			//绘制蓝色外圈
+			function blueCircle(n){
+				ctx.save();
+				ctx.strokeStyle = "#49f";
+				ctx.lineWidth = 10;
+				ctx.beginPath(); //路径开始
+				//绘制圆ctx.arc(x坐标，y坐标，半径,起始角度，终止角度，顺逆时针)
+				ctx.arc(ctxX,ctxY,100,-Math.PI/2,-Math.PI/2+n*rad,false);
+				ctx.stroke(); //绘制
+				ctx.closePath();
+				ctx.restore();
+			}
+			//绘制白色外圈
+			function whiteCircle(){
+				ctx.save();
+				ctx.beginPath();
+				ctx.strokeStyle = "#fff";
+				ctx.arc(ctxX,ctxY,100,0,Math.PI*2,false);
+				ctx.stroke();
+				ctx.closePath();
+				ctx.restore();	
+			}
+			//百分比文字绘制
+			function text(n){
+				ctx.save();
+				ctx.beginPath(); //丢弃任何当前定义的路径并且开始一条新的路径
+				ctx.strokeStyle = "#ff0000";
+				ctx.font = "40px Arial"; 
+				ctx.strokeText(n.toFixed(0)+"%",ctxX-25,ctxY+10);
+				ctx.stroke();
+				ctx.closePath();
+				ctx.restore();
+			}
+			//动画循环
+			(function drawFrame(){
+				window.requestAnimationFrame(drawFrame,canvas);
+				ctx.clearRect(0,0,canvas.width,canvas.height); //清除画布
+				whiteCircle();
+				blueCircle(speed);
+				text(speed);
+				if(speed>100) speed = 0;
+				speed+=0.1;
+			}());
+			
+		}
+		</script>
+	</body>
+</html>
